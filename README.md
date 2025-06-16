@@ -1,4 +1,5 @@
 # websocket api
+with express js
 ```bash
-npm install ecpress ejs socket.io
+npm install express ejs socket.io
 ```

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <ul id="messages"></ul>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" placeholder="Ketik pesan Anda..." /><button>Kirim</button>
+    </form>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Inisialisasi koneksi socket ke server
+    const socket = io();
+
+    // Mengambil elemen dari DOM
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+
+    // Mengirim pesan saat form disubmit
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Mencegah halaman refresh
+      if (input.value) {
+        // Mengirim event 'chat message' ke server dengan isi pesan
+        socket.emit('chat message', input.value);
+        input.value = ''; // Kosongkan input field
+      }
+    });
+
+    // Fungsi untuk menambahkan pesan ke daftar
+    const addMessage = (msg, className = '') => {
+        const item = document.createElement('li');
+        item.textContent = msg;
+        if(className) {
+            item.classList.add(className);
+        }
+        messages.appendChild(item);
+        // Auto-scroll ke pesan terbaru
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Mendengarkan event 'chat message' dari server
+    socket.on('chat message', (msg) => {
+      addMessage(msg);
+    });
+
+    // Mendengarkan pesan sistem dari server
+    socket.on('system message', (msg) => {
+      addMessage(msg, 'system-message');
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* public/style.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f4f9;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+#messages li {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 18px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+#messages li:nth-child(odd) {
+  background: #e9e9eb;
+  align-self: flex-start;
+}
+
+#messages li:nth-child(even) {
+  background: #007bff;
+  color: white;
+  align-self: flex-end; /* Ini tidak akan berfungsi langsung karena ul, tapi sebagai contoh */
+}
+
+#messages li.system-message {
+    background-color: #fffac1;
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    align-self: center;
+    max-width: 100%;
+}
+
+
+#form {
+  background: rgba(255, 255, 255, 1);
+  padding: 0.5rem;
+  display: flex;
+  height: 3rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #ddd;
+}
+
+#input {
+  border: none;
+  padding: 0 1rem;
+  flex-grow: 1;
+  border-radius: 2rem;
+  margin-right: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+#input:focus {
+  outline: none;
+}
+
+#form > button {
+  background: #007bff;
+  border: none;
+  padding: 0 1.5rem;
+  margin: 0;
+  border-radius: 2rem;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+}
